@@ -131,6 +131,8 @@ class Service:
             }
             payload["msg"] = msg
             return payload
+        except AssertionError:
+            return await self._bad_format()
         except Exception as e:
             await log_exception(
                 message="failed to connect to the plc",
