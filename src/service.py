@@ -9,6 +9,7 @@ from mock import MockPLC
 
 class Service:
     def __init__(self, url, simulate=False) -> None:
+        self.plc = None
         self.simulate_plc = simulate
         self.ctx = zmq.asyncio.Context()
         self.sock = self.ctx.socket(zmq.ROUTER)
@@ -122,7 +123,7 @@ class Service:
                 "micro800" in payload["msg"]
             ])
 
-            self.plc = await asyncio.to_thread(self._sync_connect, self.simulate_plc, payload["msg"])
+            await asyncio.to_thread(self._sync_connect, self.simulate_plc, payload["msg"])
 
             msg = {
                 "name":None,
@@ -156,7 +157,7 @@ class Service:
                     timeout=payload["timeout"],
                     Micro800=payload["micro800"]
             )
-        return plc
+        self.plc = plc
 
     # get connection size
     # ----------------------
