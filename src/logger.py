@@ -1,13 +1,16 @@
 import os
+import sys
 import logging
 from logging.handlers import RotatingFileHandler
+from logging import StreamHandler
 
 if not os.path.exists("./logs"):
     os.mkdir("./logs/")
 
 logging.basicConfig(
         handlers=[
-            RotatingFileHandler('./logs/service.log',maxBytes=10240000,backupCount=5)
+            RotatingFileHandler('./logs/service.log',maxBytes=10240000,backupCount=5),
+            StreamHandler(sys.stdout)
         ],
         level=logging.INFO,
         format='%(asctime)s %(levelname)s PID_%(process)d %(message)s'
