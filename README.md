@@ -47,7 +47,7 @@ and run the app in simulation mode. Listening for connections on localhost port 
 python3.10 -m venv venv
 source .\venv\bin\activate
 pip install -r requirements.txt
-python --server-address 127.0.0.1 --server-port 7777 --simulate True
+python ./src/main.py --server-address 127.0.0.1 --server-port 7777 --simulate True
 ```
 ### <b><u>TESTING</u></b>
 After following the installation instructions above you now have the app running in simulation mode
