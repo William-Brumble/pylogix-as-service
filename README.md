@@ -32,7 +32,7 @@ docker build -t "pylogix-as-service:v1" .
 docker run -p 127.0.0.1:7777:7777 -d --name pylogix-as-service  pylogix-as-service:v1 --server-address 0.0.0.0 --server-port 7777 --simulate True
 ```
 #### <b>WINDOWS</b>
-Running these three commands will setup a virtual environment, install the dependencies,
+Running these four commands will setup a virtual environment, install the dependencies,
 and run the app in simulation mode. Listening for connections on localhost port 7777.
 ```text
 py -m venv venv
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 python ./src/main.py --server-address 127.0.0.1 --server-port 7777 --simulate True
 ```
 #### <b>LINUX</b>
-Running these three commands will setup a virtual environment, install the dependencies,
+Running these four commands will setup a virtual environment, install the dependencies,
 and run the app in simulation mode. Listening for connections on localhost port 7777.
 ```text
 python3.10 -m venv venv
@@ -53,7 +53,7 @@ python --server-address 127.0.0.1 --server-port 7777 --simulate True
 After following the installation instructions above you now have the app running in simulation mode
 and listening on localhost port 7777. While running in simulation mode it can be useful to run
 the tester script to make sure everything is in running order.
-Fire up another terminal, from the repo root dir, activate the virtual environment, and run the following commands.
+Fire up another terminal, from the repo root dir, activate the virtual environment, and run the following command.
 ```text
 python ./src/tester.py --server-address 127.0.0.1 --server-port 7777
 ```
