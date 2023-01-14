@@ -1,4 +1,3 @@
-NB! state is in heavy development, not ready for use at the moment.
 
 Python-based ZeroMQ server that wraps Pylogix, allowing the use of it as a service.
 ```
@@ -12,11 +11,77 @@ options:
   --server-address SERVER_ADDRESS
                         The address for this service to bind to, eg. 127.0.0.1.        
   --server-port SERVER_PORT
-                        The port for this service to list on, eg. 7777.
-  --simulate SIMULATE   Simulate connection to the PLC, useful for testing.
+                        The port for this service to listen on, eg. 7777.
+  --simulate SIMULATE   Simulate connection to the PLC, useful for testing, eg. True
 ```
 
-### <b><u>MESSAGE REQUEST/RESPONSE EXAMPLES</u></b>
+### <b><u>INSTALLATION</u></b>
+Download the application.
+```
+git clone https://github.com/William-Brumble/pylogix-as-service.git
+```
+Change into the root directory.
+```text
+cd pylogix-as-service
+```
+#### <b>DOCKER</b>
+Running these two commands will build the docker image and run the app in simulation mode.
+Forwarding all requests to localhost port 7777 to the application running inside the container.
+```text
+docker build -t "pylogix-as-service:v1" .
+docker run -p 127.0.0.1:7777:7777 -d --name pylogix-as-service  pylogix-as-service:v1 --server-address 0.0.0.0 --server-port 7777 --simulate True
+```
+#### <b>WINDOWS</b>
+Running these three commands will setup a virtual environment, install the dependencies,
+and run the app in simulation mode. Listening for connections on localhost port 7777.
+```text
+py -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+python ./src/main.py --server-address 127.0.0.1 --server-port 7777 --simulate True
+```
+#### <b>LINUX</b>
+Running these three commands will setup a virtual environment, install the dependencies,
+and run the app in simulation mode. Listening for connections on localhost port 7777.
+```text
+python3.10 -m venv venv
+source .\venv\bin\activate
+pip install -r requirements.txt
+python --server-address 127.0.0.1 --server-port 7777 --simulate True
+```
+### <b><u>TESTING</u></b>
+After following the installation instructions above you now have the app running in simulation mode
+and listening on localhost port 7777. While running in simulation mode it can be useful to run
+the tester script to make sure everything is in running order.
+Fire up another terminal, from the repo root dir, activate the virtual environment, and run the following commands.
+```text
+python ./src/tester.py --server-address 127.0.0.1 --server-port 7777
+```
+The following output is indication that everything is in working order.
+```text
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 0.289s
+```
+### <b><u>MESSAGE REQUEST AND RESPONSE EXAMPLES</u></b>
+Below can be used as a useful reference of the various request message setups and their expected responses.
+
+[CONNECT](#connect)\
+[CLOSE](#close)\
+[GET CONNECTION SIZE](#get-connection-size)\
+[SET CONNECTION SIZE](#set-connection-size)\
+[READ SINGLE](#read-single)\
+[READ LIST](#read-list)\
+[WRITE SINGLE](#write-single)\
+[WRITE LIST](#write-list)\
+[GET PLC TIME](#get-plc-time)\
+[SET PLC TIME](#set-plc-time)\
+[GET TAG LIST](#get-tag-list)\
+[GET PROGRAM TAG LIST](#get-program-tag-list)\
+[GET PROGRAMS TAG LIST](#get-programs-tag-list)\
+[DISCOVER](#discover)\
+[GET MODULE PROPERTIES](#get-module-properties)\
+[GET DEVICE PROPERTIES](#get-device-properties)
 #### CONNECT
 ```python
 # request
@@ -412,3 +477,9 @@ options:
     }
 }
 ```
+### WARNING - DISCLAIMER
+NB! state is in heavy development, I'm using this in a lab environment, and it is in working order, however this hasn't been battle tested. If you have any issues please post an issue or submit a pull request. Many thanks.
+
+**PLCs control many kinds of equipment and loss of property, production or even life can happen if mistakes in programming or access are made.  Always use caution when accessing or programming PLCs!**
+
+We make no claims or warrants about the suitability of this code for any purpose.
