@@ -15,7 +15,7 @@ options:
   --simulate SIMULATE   Simulate connection to the PLC, useful for testing, eg. True
 ```
 
-### <b><u>INSTALLATION</u></b>
+## INSTALLATION
 Download the application.
 ```
 git clone https://github.com/William-Brumble/pylogix-as-service.git
@@ -49,7 +49,7 @@ source .\venv\bin\activate
 pip install -r requirements.txt
 python ./src/main.py --server-address 127.0.0.1 --server-port 7777 --simulate True
 ```
-### <b><u>TESTING</u></b>
+## TESTING
 After following the installation instructions above you now have the app running in simulation mode
 and listening on localhost port 7777. While running in simulation mode it can be useful to run
 the tester script to make sure everything is in running order.
@@ -63,7 +63,11 @@ The following output is indication that everything is in working order.
 ----------------------------------------------------------------------
 Ran 14 tests in 0.289s
 ```
-### <b><u>MESSAGE REQUEST AND RESPONSE EXAMPLES</u></b>
+## PRODUCTION
+Simply run the aforementioned commands with simulation option set to False.\
+First connect to a PLC by sending the CONNECT command, afterward any future calls to CONNECT will close the existing connection and make the new connection.\
+Then send any of the desired listed requests below.
+## MESSAGE REQUEST AND RESPONSE EXAMPLES
 Below can be used as a useful reference of the various request message setups and their expected responses.
 
 [CONNECT](#connect)\
