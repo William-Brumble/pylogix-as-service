@@ -65,8 +65,10 @@ Ran 14 tests in 0.289s
 ```
 ## PRODUCTION
 Simply run the aforementioned commands with simulation option set to False.\
-First connect to a PLC by sending the CONNECT command, afterward any future calls to CONNECT will close the existing connection and make the new connection.\
-Then send any of the desired listed requests below.
+First connect to a PLC by sending the CONNECT command, then send any of the desired listed requests below.\
+Any future calls to CONNECT will close the existing connection and make a new connection.\
+You don't need to call CONNECT before every request, there is one connection maintained at a time.\
+However if you want to send messages to multiple PLCs you could connect to the desired PLC prior to sending any of the requests shown below.
 ## MESSAGE REQUEST AND RESPONSE EXAMPLES
 Below can be used as a useful reference of the various request message setups and their expected responses.
 
@@ -487,3 +489,9 @@ NB! state is in heavy development, I'm using this in a lab environment, and it i
 **PLCs control many kinds of equipment and loss of property, production or even life can happen if mistakes in programming or access are made.  Always use caution when accessing or programming PLCs!**
 
 We make no claims or warrants about the suitability of this code for any purpose.
+## LICENSE
+The code in this repository is licensed under MIT license.
+Refer to the dependencies in requirements.txt and their dependencies for their licenses.\
+[pyzmq](https://github.com/zeromq/pyzmq)\
+[tornado](https://github.com/tornadoweb/tornado)\
+[pylogix](https://github.com/dmroeder/pylogix)
