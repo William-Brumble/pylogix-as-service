@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pylogix-as-service-deployment
+  labels:
+    app: test-dev
+    tier: sub
+spec:
+  selector:
+    matchLabels:
+      app: pylogix-as-service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: pylogix-as-service
+    spec:
+      containers:
+      - name: pylogix-as-service
+        image: localhost:32000/pylogix-as-service:v1
+        args: ["--server-address", "0.0.0.0", "--server-port", "7777", "--simulate", "True"]
+        ports:
+        - containerPort: 7777
