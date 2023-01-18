@@ -1,10 +1,19 @@
 apiVersion: v1
+
+# SETS UP SERVICE OBJECT
 kind: Service
 metadata:
   name: pylogix-as-service-service
+
 spec:
+  type: NodePort
+  # SELECTS WHICH PODS TO BE APPLIED TO
   selector:
     app: pylogix-as-service
   ports:
+    # EXTERNAL CLUSTER PORT
     - port: 7777
+      # INTERNAL CONTAINER PORT
       targetPort: 7777
+      # CONTROL PLANE EXTERNAL PORT
+      nodePort: 32767
