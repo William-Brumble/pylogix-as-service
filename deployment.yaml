@@ -1,14 +1,20 @@
 apiVersion: apps/v1
+
+# SETS UP DEPLOMENT OBJECT
 kind: Deployment
 metadata:
   name: pylogix-as-service-deployment
-  labels:
-    app: pylogix-as-service
+
 spec:
+  # SETS HOW MANY INSTANCES
+  replicas: 1
+
+  # SELECTS PODS TO BE CONTROLLED
   selector:
     matchLabels:
       app: pylogix-as-service
-  replicas: 2
+
+  # SETUP INDIVIDUAL PODS
   template:
     metadata:
       labels:
